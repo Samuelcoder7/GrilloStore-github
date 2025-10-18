@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,14 +26,24 @@
     <main class="auth-page">
         <div class="auth-card">
             <h2>Faça seu login</h2>
+
+            <!-- MENSAGENS DE ERRO -->
+            <?php
+            session_start();
+            if (isset($_SESSION['erro_login'])) {
+                echo '<div class="error-message" style="color: red; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">' . $_SESSION['erro_login'] . '</div>';
+                unset($_SESSION['erro_login']);
+            }
+            ?>
+
             <form action="processa_login.php" method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <br><br>
                 <input type="password" name="senha" placeholder="Senha" required>
                 <br><br>
-                <input class="inputSubmit" type="submit" name="submit" value="Entrar">           
+                <input class="inputSubmit" type="submit" name="submit" value="Entrar">
             </form>
-            
+
             <div class="auth-link">
                 Não tem uma conta? <a href="cadastro.php">Cadastre-se</a>
             </div>
@@ -66,4 +77,5 @@
 
     <script src="../script/script-login.js"></script>
 </body>
+
 </html>
