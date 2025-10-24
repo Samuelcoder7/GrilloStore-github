@@ -51,8 +51,11 @@ if(isset($_SESSION['erro_login'])) {
               <li><a href="cadastro.php" class="btn btn-primary">Cadastro</a></li>
               <li><a href="login.php" class="btn btn-secondary" id="login-btn">Login</a></li>
            <?php endif; ?>
+           
            <li class="cart-link"><a href="#"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
-           <li class="cep-link"><a href="#" id="header-cep-btn"><i class="fas fa-map-marker-alt"></i> Inserir CEP</a></li>
+           
+           <li class="cep-link"><a href="cep.php" id="header-cep-btn"><i class="fas fa-map-marker-alt"></i> Inserir CEP </a></li>
+
          </ul>
 
             <div class="darkmode-container">
@@ -186,41 +189,8 @@ if(isset($_SESSION['erro_login'])) {
     </div>
 
 
-    <!<div id="cep-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="close-cep-modal">&times;</span>
-            <h2>Inserir Endereço</h2>
-            <p>Preencha os campos abaixo para salvar seu endereço.</p>
-            <form id="cep-form">
-                <div class="form-group">
-                    <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" required>
-                </div>
-                <div class="form-group">
-                    <label for="rua">Rua</label>
-                    <input type="text" id="rua" name="rua" placeholder="Ex: Rua das Flores" required>
-                </div>
-                <div class="form-group">
-                    <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" placeholder="Ex: 123" required>
-                </div>
-                <div class="form-group">
-                    <label for="bairro">Bairro</label>
-                    <input type="text" id="bairro" name="bairro" placeholder="Ex: Centro">
-                </div>
-                <div class="form-group">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" placeholder="Ex: São Paulo">
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <input type="text" id="estado" name="estado" placeholder="Ex: SP">
-                </div>
-                <button type="submit" class="btn-primary">Salvar Endereço</button>
-            </form>
-        </div>
-        
-    </div>
+   
+       
 
     <div id="block-modal" class="modal" style="display:none;"> 
     <div class="modal-content block-content">

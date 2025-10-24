@@ -722,7 +722,7 @@ main {
     display: flex;
 }
 
-.modal-content {
+.cep-content {
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;

@@ -92,10 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 🎨 --- Elementos da Interface (TODAS AS VARIÁVEIS DECLARADAS AQUI) ---
     // -------------------------------------------------------------------------
     
-    // Modal CEP e Navegação
-    const cepModal = document.getElementById('cep-modal');
-    const closeCepBtn = document.getElementById('close-cep-modal');
-    const headerCepBtn = document.getElementById('header-cep-btn'); 
+
 
     // Variáveis para o Bloqueio de Acesso
     const viewAllButtonContainer = document.querySelector('.btn-view-all').parentElement; 
@@ -103,15 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBlockModal = document.getElementById('close-block-modal');
     const productCards = document.querySelectorAll(".product-card"); // Selecionado aqui
 
-    // Elementos do formulário de CEP
-    const cepInput = document.getElementById('cep');
-    const cepForm = document.getElementById('cep-form');
-    const ruaInput = document.getElementById('rua');
-    const numeroInput = document.getElementById('numero');
-    const bairroInput = document.getElementById('bairro');
-    const cidadeInput = document.getElementById('cidade');
-    const estadoInput = document.getElementById('estado');
-
+   
     // Botões de adicionar ao carrinho
     const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
 
@@ -145,28 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Função para buscar CEP usando a API ViaCEP
-    async function searchCep(cep) {
-        cep = cep.replace(/\D/g, '');
-        if (cep.length !== 8) {
-            return { error: 'CEP inválido. Por favor, insira 8 dígitos.' };
-        }
-
-        try {
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-            if (!response.ok) {
-                throw new Error('Erro na comunicação com a API.');
-            }
-            const data = await response.json();
-            if (data.erro) {
-                return { error: 'CEP não encontrado. Verifique o número e tente novamente.' };
-            }
-            return data;
-        } catch (error) {
-            console.error('Falha na busca de CEP:', error);
-            return { error: 'Erro de comunicação. Tente novamente mais tarde.' };
-        }
-    }
+    
     
     // Função para ativar o modo escuro
     function enableDarkMode() {
@@ -242,63 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Event Listeners para Modal CEP ---
-    headerCepBtn.addEventListener('click', (e) => showModal(cepModal, e));
-    closeCepBtn.addEventListener('click', () => hideModal(cepModal));
-
-    window.addEventListener('click', (e) => {
-        if (e.target === cepModal) {
-            hideModal(cepModal);
-        }
-    });
-
-    // Manipula o envio do formulário de CEP
-    cepForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const cepValue = cepInput.value;
-        const result = await searchCep(cepValue);
-
-        if (result.error) {
-            displayInfoPopup(result.error, 'Erro de CEP');
-            return;
-        }
-
-        ruaInput.value = result.logradouro || '';
-        numeroInput.placeholder = 'Ex: 123';
-        bairroInput.value = result.bairro || '';
-        cidadeInput.value = result.localidade || '';
-        estadoInput.value = result.uf || '';
-
-        displayInfoPopup(`Endereço encontrado: ${result.logradouro || 'N/A'}, ${result.localidade || 'N/A'} - ${result.uf || 'N/A'}`, 'Endereço Salvo');
-
-        hideModal(cepModal);
-    });
-
-    // Lógica para preencher automaticamente os campos de endereço ao perder o foco do input CEP
-    cepInput.addEventListener('blur', async () => {
-        const cepValue = cepInput.value.replace(/\D/g, '');
-        if (cepValue.length === 8) {
-            const data = await searchCep(cepValue);
-            if (!data.error) {
-                ruaInput.value = data.logradouro || '';
-                if (!bairroInput.value) bairroInput.value = data.bairro || '';
-                if (!cidadeInput.value) cidadeInput.value = data.localidade || '';
-                if (!estadoInput.value) estadoInput.value = data.uf || '';
-            } else {
-                ruaInput.value = '';
-                bairroInput.value = '';
-                cidadeInput.value = '';
-                estadoInput.value = '';
-            }
-        } else {
-            ruaInput.value = '';
-            bairroInput.value = '';
-            cidadeInput.value = '';
-            estadoInput.value = '';
-        }
-    });
-
+    
     // Funcionalidade dos botões "Adicionar ao Carrinho"
     addToCartButtons.forEach(button => {
         button.addEventListener('click', () => {
