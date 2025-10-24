@@ -186,7 +186,7 @@ if(isset($_SESSION['erro_login'])) {
     </div>
 
 
-    <div id="cep-modal" class="modal">
+    <!<div id="cep-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="close-cep-modal">&times;</span>
             <h2>Inserir Endereço</h2>
